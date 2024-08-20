@@ -88,11 +88,6 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
-// Add services to the container.
-builder.Services.AddTransient<IAuthService, AuthService>();
-builder.Services.AddTransient<IProcessService, ProcessService>();
-builder.Services.AddTransient<IAuthHelper, AuthHelper>();
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -112,6 +107,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProcessService, ProcessService>();
+builder.Services.AddScoped<IAuthHelper, AuthHelper>();
 
 var app = builder.Build();
 
