@@ -1,13 +1,11 @@
 using jobsAnalyze.Database;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using jobsAnalyze.Business_Logic.Interfaces;
 using jobsAnalyze.Business_Logic;
-using jobsAnalyze.Models.DTO;
 using Microsoft.OpenApi.Models;
 using jobsAnalyze.Helpers.Interfaces;
 using jobsAnalyze.Helpers;
