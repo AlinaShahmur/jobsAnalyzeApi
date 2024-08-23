@@ -3,7 +3,6 @@ using jobsAnalyze.Business_Logic.Interfaces;
 using jobsAnalyze.Database;
 using jobsAnalyze.Models.DTO;
 using jobsAnalyze.Models.Process.BE;
-using jobsAnalyze.ResponseWrapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace jobsAnalyze.Business_Logic
