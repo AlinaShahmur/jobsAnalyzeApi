@@ -4,7 +4,6 @@ using jobsAnalyze.Models;
 using jobsAnalyze.Models.Auth.BE;
 using jobsAnalyze.Models.Auth.Requests;
 using jobsAnalyze.ResponseWrapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace jobsAnalyze.Controllers
@@ -24,7 +23,7 @@ namespace jobsAnalyze.Controllers
         [HttpPost]
         public async Task<ActionResult<BaseResponse>> Register(RegisterRequestModel request) {
             RegisterUserBE registerUserBE = _mapper.Map<RegisterUserBE>(request);
-            BaseResponse res = _mapper.Map<ResponseBE, BaseResponse>(await _authService.Register(registerUserBE));
+            BaseResponse res = _mapper.Map<BaseResponse>(await _authService.Register(registerUserBE));
             return StatusCode(res.Code, res);
         }
 
