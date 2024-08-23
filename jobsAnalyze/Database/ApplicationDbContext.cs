@@ -34,7 +34,7 @@ namespace jobsAnalyze.Database
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.HasDefaultSchema("identity");
+
         }
 
     }
