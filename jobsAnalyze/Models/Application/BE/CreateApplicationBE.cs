@@ -1,0 +1,14 @@
+﻿namespace jobsAnalyze.Models.Application.BE
+{
+    public class CreateApplicationBE
+    {
+        public string Role { get; set; }
+        public DateTime StartDate { get; set; }
+        public string Img { get; set; }
+        public string CompanyName { get; set; }
+        public int SourceId { get; set; }
+        public int StatusId { get; set; }
+        public int ProcessId { get; set; }
+        public int CurrentStage { get; set; }
+    }
+}

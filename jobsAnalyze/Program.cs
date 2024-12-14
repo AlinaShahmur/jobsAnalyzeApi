@@ -11,7 +11,7 @@ using jobsAnalyze.Helpers.Interfaces;
 using jobsAnalyze.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddMemoryCache();
 string? tokenKeyValue = builder.Configuration.GetSection("AppSettings:TokenKey").Value;
 byte[] key = Encoding.UTF8.GetBytes(tokenKeyValue != null ? tokenKeyValue : "");
 SymmetricSecurityKey tokenKey = new SymmetricSecurityKey(key);
@@ -96,6 +96,15 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => options.TokenValidationParameters = tokenValidationParameters);
 
+builder.Services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
+
+            options.ClientId = googleAuthNSection["ClientId"];
+            options.ClientSecret = googleAuthNSection["ClientSecret"];
+        });
+
 builder.Services.AddIdentityCore<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddApiEndpoints();
@@ -107,9 +116,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProcessService, ProcessService>();
 builder.Services.AddScoped<IAuthHelper, AuthHelper>();
+builder.Services.AddScoped<IFilesUtils, CSVUtils>();
 
 var app = builder.Build();
 
+app.UseCors(
+    options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

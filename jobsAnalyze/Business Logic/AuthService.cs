@@ -48,7 +48,7 @@ namespace jobsAnalyze.Business_Logic
                 if (res)
                 { 
                     string token = this.SuccessfulLoginAction(foundUser.Id);
-                    return new ResponseBE(200, "", token);
+                    return new ResponseBE(200, "",  new  { token, foundUser});
                 }
             }
             return new ResponseBE(401);

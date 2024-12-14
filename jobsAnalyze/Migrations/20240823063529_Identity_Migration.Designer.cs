@@ -12,15 +12,14 @@ using jobsAnalyze.Database;
 namespace jobsAnalyze.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240818095426_JobMigrations")]
-    partial class JobMigrations
+    [Migration("20240823063529_Identity_Migration")]
+    partial class Identity_Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("identity")
                 .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -50,7 +49,7 @@ namespace jobsAnalyze.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", "identity");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -75,7 +74,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", "identity");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -140,7 +139,7 @@ namespace jobsAnalyze.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", "identity");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -165,7 +164,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", "identity");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -187,7 +186,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", "identity");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -202,7 +201,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", "identity");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -221,7 +220,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", "identity");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("jobsAnalyze.Models.DTO.Application", b =>
@@ -261,7 +260,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Applications", "identity");
+                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("jobsAnalyze.Models.DTO.ApplicationStage", b =>
@@ -283,7 +282,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("ApplicationStages", "identity");
+                    b.ToTable("ApplicationStages");
                 });
 
             modelBuilder.Entity("jobsAnalyze.Models.DTO.Process", b =>
@@ -298,12 +297,13 @@ namespace jobsAnalyze.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Processes", "identity");
+                    b.ToTable("Processes");
                 });
 
             modelBuilder.Entity("jobsAnalyze.Models.DTO.Source", b =>
@@ -320,7 +320,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Sources", "identity");
+                    b.ToTable("Sources");
                 });
 
             modelBuilder.Entity("jobsAnalyze.Models.DTO.Stage", b =>
@@ -337,7 +337,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Stages", "identity");
+                    b.ToTable("Stages");
                 });
 
             modelBuilder.Entity("jobsAnalyze.Models.DTO.Status", b =>
@@ -354,7 +354,7 @@ namespace jobsAnalyze.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Statuses", "identity");
+                    b.ToTable("Statuses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
