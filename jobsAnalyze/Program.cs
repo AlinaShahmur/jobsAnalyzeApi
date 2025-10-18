@@ -12,7 +12,7 @@ using jobsAnalyze.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMemoryCache();
-string? tokenKeyValue = builder.Configuration.GetSection("AppSettings:TokenKey").Value;
+string? tokenKeyValue = builder.Configuration.GetSection("TokenKey").Value;
 byte[] key = Encoding.UTF8.GetBytes(tokenKeyValue != null ? tokenKeyValue : "");
 SymmetricSecurityKey tokenKey = new SymmetricSecurityKey(key);
 

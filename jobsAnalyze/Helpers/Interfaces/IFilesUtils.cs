@@ -2,6 +2,6 @@
 {
     public interface IFilesUtils
     {
-        public MemoryStream CreateCSV<T>(List<T> items);
+        public MemoryStream CreateFile<T>(List<T> items);
     }
 }

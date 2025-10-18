@@ -9,11 +9,10 @@ namespace jobsAnalyze.Helpers
 {
     public class CSVUtils : IFilesUtils
     {
-        public MemoryStream CreateCSV<T>(List<T> items)
+        public MemoryStream CreateFile<T>(List<T> items)
         {
             var csv = new StringBuilder();
             string[] columns = typeof(T).GetProperties().Select(p => p.Name).ToArray();
-            //the initial value is a first item
             string header = columns.Aggregate((acc, x) => acc + "," + x);
             csv.AppendLine(header);
             for (int i = 0; i < items.Count; i++)

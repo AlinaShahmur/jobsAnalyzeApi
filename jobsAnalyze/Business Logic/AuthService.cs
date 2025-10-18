@@ -2,17 +2,9 @@
 using jobsAnalyze.Business_Logic.Interfaces;
 using jobsAnalyze.Models.Auth.BE;
 using Microsoft.AspNetCore.Identity;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using Microsoft.EntityFrameworkCore;
-using jobsAnalyze.Models.DTO;
 using jobsAnalyze.ResponseWrapper;
-using System.Resources;
-using jobsAnalyze.Helpers;
 using jobsAnalyze.Helpers.Interfaces;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace jobsAnalyze.Business_Logic
 {
@@ -35,8 +27,9 @@ namespace jobsAnalyze.Business_Logic
                 await RegisterNewUser(userToRegister);
                 return new ResponseBE(200);
             }
-            string? msgUserExists = Resource.ResourceManager.GetString("MsgUserExists");
-            return new ResponseBE(400, msgUserExists.IsNullOrEmpty() ? "" : msgUserExists);
+            string? msgUserExistsResources = Resource.ResourceManager.GetString("MsgUserExists");
+            string msgUserExists = msgUserExistsResources.IsNullOrEmpty() ? "" : msgUserExistsResources;
+            return new ResponseBE(400, msgUserExists);
         }
 
         public async Task<ResponseBE> Login(LoginUserBE loginUser)
@@ -54,12 +47,6 @@ namespace jobsAnalyze.Business_Logic
             return new ResponseBE(401);
         }
 
-        //public async Task<ResponseBE> Logout(string userId)
-        //{
-
-        //}
-
-
         private async Task RegisterNewUser(RegisterUserBE user)
         {
             IdentityUser newUser = _mapper.Map<RegisterUserBE, IdentityUser>(user);
@@ -69,6 +56,11 @@ namespace jobsAnalyze.Business_Logic
         private string SuccessfulLoginAction(string userId)
         {
            return _authHelper.CreateToken(userId);
+        }
+
+        public void runTesting()
+        {
+            
         }
     }
 }

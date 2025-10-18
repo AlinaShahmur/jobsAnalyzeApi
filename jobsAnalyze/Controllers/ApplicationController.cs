@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using jobsAnalyze.Business_Logic;
 using jobsAnalyze.Business_Logic.Interfaces;
 using jobsAnalyze.Helpers.Interfaces;
 using jobsAnalyze.Models;
@@ -9,10 +8,6 @@ using jobsAnalyze.Models.DTO;
 using jobsAnalyze.ResponseWrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 
 namespace jobsAnalyze.Controllers
 {
@@ -34,7 +29,7 @@ namespace jobsAnalyze.Controllers
         [Authorize]
         public async Task<List<Application>> GetApplicationsPaginated(int processId, [FromQuery] int pageNum, [FromQuery] int pageSize, [FromQuery] string sortBy, [FromQuery] int sortType)
         {
-            return await _applicationService.GetPaginatedApplications(processId, pageNum, pageSize, sortBy, sortType);
+            return await _applicationService.GetPaginatedApplications(processId, pageNum, pageSize, sortBy,(Helpers.Enums.SortType)sortType);
         }
 
         [HttpPost]
@@ -51,7 +46,7 @@ namespace jobsAnalyze.Controllers
         {
 
             List<Application> applications = await _applicationService.GetApplications(ProcessId);
-            MemoryStream stream =  _filesUtils.CreateCSV(applications);
+            MemoryStream stream =  _filesUtils.CreateFile(applications);
             return File(stream.ToArray(), "text/csv", "test");
         }
     }

@@ -25,17 +25,17 @@ namespace jobsAnalyze.Controllers
         [Authorize]
         public async Task<List<Process>> GetProcesses()
         {
+            List<Process> processes = new List<Process>();
             string? userId = GetCurrentUserId();
             if (userId != null)
             {
-                return await _processService.GetProcesses(userId);
+                processes = await _processService.GetProcesses(userId);
             }
-            return null;
+            return processes;
         }
 
         [HttpPost]
         [Authorize]
-
         public async Task<bool> CreateProcess(CreateProcessRequest newProcess)
         {
             string? userId = GetCurrentUserId();
@@ -54,12 +54,8 @@ namespace jobsAnalyze.Controllers
         private string? GetCurrentUserId()
         {
             var userIdClaim = HttpContext.User.FindFirst("userId");
-            if (userIdClaim != null)
-            {
-                string? userId = userIdClaim.Value;
-                return userId;
-            }
-            return null;
+            string? currentUserId = userIdClaim != null ? userIdClaim.Value : null;
+            return currentUserId;
         }
     }
 }

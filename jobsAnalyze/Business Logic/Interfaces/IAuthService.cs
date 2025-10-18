@@ -8,6 +8,5 @@ namespace jobsAnalyze.Business_Logic.Interfaces
     {
         public Task<ResponseBE> Register(RegisterUserBE userToRegister);
         public Task<ResponseBE> Login(LoginUserBE loginRequest);
-        //public Task<ResponseBE> Logout(string userId);
     }
 }
